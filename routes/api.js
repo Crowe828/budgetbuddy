@@ -1,3 +1,4 @@
+// Dependencies
 const router = require("express").Router();
 const Transaction = require("../models/transaction.js");
 
@@ -12,7 +13,7 @@ router.post("/api/transaction", ({ body }, res) => {
 });
 
 router.post("/api/transaction/bulk", ({ body }, res) => {
-  console.log("inserting")
+  console.log("inserting");
   Transaction.insertMany(body)
     .then((dbTransaction) => {
       res.json(dbTransaction);

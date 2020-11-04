@@ -1,33 +1,52 @@
-# budgetbuddy
+# BudgetBuddy
 
-Add functionality to our existing Budget Tracker application to allow for offline access and functionality.
+[![made-with-Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
 
-The user will be able to add expenses and deposits to their budget with or without a connection. When entering transactions offline, they should populate the total when brought back online.
+## Description
 
-Offline Functionality:
+Track your finances better with BudgetBuddy. Stuck on the road for days on end? BudgetBuddy has you covered. Even when you're offline, BudgetBuddy is here ti help.
 
-- Enter deposits offline
+## Table of Contents
 
-- Enter expenses offline
+- [Images](#images)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [Questions](#tests)
 
-When brought back online:
+## Images
 
-- Offline entries should be added to tracker.
+- This is how the app will look after populating it with a few transactions:
 
-## User Story
+![BudgetBuddy](https://github.com/Crowe828/budgetbuddy/blob/main/images/budgetbuddy.png)
 
-AS AN avid traveller
-I WANT to be able to track my withdrawals and deposits with or without a data/internet connection
-SO THAT my account balance is accurate when I am traveling
+## Installation
 
-## Business Context
+git clone https://github.com/Crowe828/budgetbuddy.git
 
-Giving users a fast and easy way to track their money is important, but allowing them to access that information anytime is even more important. Having offline functionality is paramount to our applications success.
+## Usage
 
-## Acceptance Criteria
+Enter your transactions into the form and see how the populate on the chart below. All of your transactions will be stored in a database, so no worries if you want to leave your work and come back later.
 
-GIVEN a user is on Budget App without an internet connection
-WHEN the user inputs a withdrawal or deposit
-THEN that will be shown on the page, and added to their transaction history when their connection is back online.
+## Contributing
 
-Deploy your application with [Heroku and MongoDB Atlas.](../04-Important/MongoAtlas-Deploy.md)
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Please make sure to update tests as appropriate.
+
+## Tests
+
+```
+console.log(test);
+```
+
+The console will display the word 'test'
+
+## Questions
+
+If you would like to learn more, feel free to check out my GitHub or send me an email anytime.
+
+- [GitHub](https://github.com/Crowe828)
+- [Repo](https://github.com/Crowe828/budgetbuddy)
+- [Email Me](mailto:crowe828@gmail.com?subject=Nice%20README%20Generator%20Dude)

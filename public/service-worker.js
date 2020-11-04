@@ -1,3 +1,4 @@
+// Caching all of the files within the/public folder
 const FILES_TO_CACHE = [
   "/",
   "/icons/icon-192x192.png",
@@ -12,7 +13,7 @@ const FILES_TO_CACHE = [
 const CACHE_NAME = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
 
-// install
+// Install
 self.addEventListener("install", function (evt) {
   evt.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -24,7 +25,7 @@ self.addEventListener("install", function (evt) {
   self.skipWaiting();
 });
 
-// activate
+// Activate
 self.addEventListener("activate", function (evt) {
   evt.waitUntil(
     caches.keys().then((keyList) => {
@@ -42,7 +43,7 @@ self.addEventListener("activate", function (evt) {
   self.clients.claim();
 });
 
-// fetch
+// Fetch
 self.addEventListener("fetch", (evt) => {
   if (evt.request.url.includes("/api/")) {
     console.log("[Service Worker] Fetch(data)", evt.request.url);
@@ -70,7 +71,7 @@ self.addEventListener("fetch", (evt) => {
         if (response) {
           return response;
         } else if (evt.request.headers.get("accept").includes("text/html")) {
-          // return the cached home page for all requests for html pages
+          // Return the cached homepage for all requests for html pages
           return caches.match("/");
         }
       });
