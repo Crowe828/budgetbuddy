@@ -1,11 +1,12 @@
 const FILES_TO_CACHE = [
   "/",
-  "/index.html",
-  "/manifest.webmanifest",
-  "/index.js",
-  "/styles.css",
   "/icons/icon-192x192.png",
   "/icons/icon-512x512.png",
+  "/index.html",
+  "index.js",
+  "/db.js",
+  "/styles.css",
+  "manifest.webmanifest",
 ];
 
 const CACHE_NAME = "static-cache-v2";
@@ -13,18 +14,13 @@ const DATA_CACHE_NAME = "data-cache-v1";
 
 // install
 self.addEventListener("install", function (evt) {
-  // pre cache image data
   evt.waitUntil(
-    caches.open(DATA_CACHE_NAME).then((cache) => cache.add("/api/transaction"))
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log("Your files were pre-cached successfully!");
+      return cache.addAll(FILES_TO_CACHE);
+    })
   );
 
-  // pre cache all static assets
-  evt.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(FILES_TO_CACHE))
-  );
-
-  // tell the browser to activate this service worker immediately once it
-  // has finished installing
   self.skipWaiting();
 });
 
@@ -47,36 +43,36 @@ self.addEventListener("activate", function (evt) {
 });
 
 // fetch
-self.addEventListener("fetch", function (evt) {
+self.addEventListener("fetch", (evt) => {
   if (evt.request.url.includes("/api/")) {
+    console.log("[Service Worker] Fetch(data)", evt.request.url);
+
     evt.respondWith(
-      caches
-        .open(DATA_CACHE_NAME)
-        .then((cache) => {
-          return fetch(evt.request)
-            .then((response) => {
-              // If the response was good, clone it and store it in the cache.
-              if (response.status === 200) {
-                cache.put(evt.request.url, response.clone());
-              }
-
-              return response;
-            })
-            .catch((err) => {
-              // Network request failed, try to get it from the cache.
-              return cache.match(evt.request);
-            });
-        })
-        .catch((err) => console.log(err))
+      caches.open(DATA_CACHE_NAME).then((cache) => {
+        return fetch(evt.request)
+          .then((response) => {
+            if (response.status === 200) {
+              cache.put(evt.request.url, response.clone());
+            }
+            return response;
+          })
+          .catch((err) => {
+            return cache.match(evt.request);
+          });
+      })
     );
-
     return;
   }
 
   evt.respondWith(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.match(evt.request).then((response) => {
-        return response || fetch(evt.request);
+    fetch(evt.request).catch(function () {
+      return caches.match(evt.request).then(function (response) {
+        if (response) {
+          return response;
+        } else if (evt.request.headers.get("accept").includes("text/html")) {
+          // return the cached home page for all requests for html pages
+          return caches.match("/");
+        }
       });
     })
   );
