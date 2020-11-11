@@ -4,7 +4,7 @@
 
 ## Description
 
-Track your finances better with BudgetBuddy. Stuck on the road for days on end? BudgetBuddy has you covered. Even when you're offline, BudgetBuddy is here ti help.
+Track your finances better with BudgetBuddy. Stuck on the road for days on end? BudgetBuddy has you covered. Even when you're offline, BudgetBuddy is here to help.
 
 ## Table of Contents
 
